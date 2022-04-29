@@ -1,6 +1,7 @@
 package elementos;
 
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 import logicaJuego.Constantes;
 
@@ -13,6 +14,9 @@ public class Coordenada {
 	//constructores
 	public Coordenada() {
 		super();
+		ThreadLocalRandom rX = ThreadLocalRandom.current();
+        this.x = rX.nextInt(0, Constantes.TAMANNO);
+        this.y = rX.nextInt(0, Constantes.TAMANNO);
 	}
 	
 	public Coordenada(int x, int y) {
@@ -47,14 +51,54 @@ public class Coordenada {
 			this.y = 0;
 		}
 	}
-
+	
+	//metodos (mover posicion)
+	public boolean goDown() {
+		boolean respuesta = true;
+		if(y == Constantes.TAMANNO-1) {
+			respuesta = false;
+		}else {
+			this.y++;
+		}
+		return respuesta;
+	}
+	
+	public boolean goUp() {
+		boolean respuesta = true;
+		if(y== 0) {
+			respuesta = false;
+		}else {
+			this.y--;
+		}
+		return respuesta;
+	}
+	
+	public boolean goRight() {
+		boolean respuesta = true;
+		if(x== Constantes.TAMANNO-1) {
+			respuesta = false;
+		}else {
+			this.x++;
+		}
+		return respuesta;
+	}
+	
+	public boolean goLeft() {
+		boolean respuesta = true;
+		if(x==0) {
+			respuesta = false;
+		}else {
+			this.x--;
+		}
+		return respuesta;
+	}
+	
+	
 	//hashcode and Equals
 	@Override
 	public int hashCode() {
 		return Objects.hash(x, y);
 	}
-	
-	//metodos
 
 	@Override
 	public boolean equals(Object obj) {

@@ -2,8 +2,6 @@ package elementos;
 
 import java.util.Objects;
 
-import com.jacaranda.enumerados.ElementType;
-
 public class Element {
 
 	protected ElementType type;
