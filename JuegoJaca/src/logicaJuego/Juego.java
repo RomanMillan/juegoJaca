@@ -13,7 +13,80 @@ public class Juego {
 	private int jugadorJuega;
 	private int dado; // Dado para ver los movimientos del jugador que juega
 
+	
+	public Juego (PlayerType[]jugadores) {
+		tablero = new HashMap<>(); 
+		coordenadaJugadores = new ArrayList<>();
+		
+	}
+	
 
+	//NO SE QUE SE HACE
+	private void crearTablero() {
+				
+	}
+	
+	private void crearRocas() {
+		for (int i=0;i<Constantes.NUM_ROCAS;i++) {
+			Element e1 = new Element(ElementType.ROCA);
+			boolean encontrado = true;
+			do {
+				Coordenada c1 = new Coordenada();
+				if(!tablero.containsKey(c1)) {
+					tablero.put(c1,e1);
+					encontrado = false;
+				}
+			}while(encontrado);
+		}
+	}
+	
+	
+	private void crearGemas() {
+		for (int i=0;i<Constantes.NUM_GEMAS;i++) {
+			Element e1 = new Element(ElementType.GEMA);
+			boolean encontrado = true;
+			do {
+				Coordenada c1 = new Coordenada();
+				if(!tablero.containsKey(c1)) {
+					tablero.put(c1,e1);
+					encontrado = false;
+				}
+			}while(encontrado);
+		}
+	}
+	
+	private void crearPociones() {
+		for (int i=0;i<Constantes.NUM_POCIONES;i++) {
+			Element e1 = new Element(ElementType.POCION);
+			boolean encontrado = true;
+			do {
+				Coordenada c1 = new Coordenada();
+				if(!tablero.containsKey(c1)) {
+					tablero.put(c1,e1);
+					encontrado = false;
+				}
+			}while(encontrado);
+		}
+	}
+	
+	
+	private void crearDinero() {
+		for (int i=0;i<Constantes.NUM_DINERO;i++) {
+			Element e1 = new Element(ElementType.DINERO);
+			boolean encontrado = true;
+			do {
+				Coordenada c1 = new Coordenada();
+				if(!tablero.containsKey(c1)) {
+					tablero.put(c1,e1);
+					encontrado = false;
+				}
+			}while(encontrado);
+		}
+	}
+	
+	
+	
+	
 	/**
 	 * Escribe el tablero en formato no gráfico. Devuelve el string con la
 	 * información

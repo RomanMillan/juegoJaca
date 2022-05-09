@@ -131,12 +131,13 @@ public class Jugador {
 			resultado = Constantes.ROMPE_ROCA_CON_GEMA;
 			setGemas(getGemas()-1);
 		}else if(getMagia()>4) {
-			resultado = Constantes.PIERDE_A_LA_ROCA;
-		}else {
 			resultado = Constantes.GANA_A_LA_ROCA;
+		}else {
+			resultado = Constantes.PIERDE_A_LA_ROCA;
 		}
 		
 		return resultado;
+		
 	}
 	
 	
