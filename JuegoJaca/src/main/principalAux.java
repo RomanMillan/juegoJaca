@@ -7,7 +7,7 @@ public class principalAux {
 	public static void main(String[] args) {
 
 		
-		Coordenada coord = new Coordenada(-1,-1);
+		Coordenada coord = new Coordenada(10,1);
 		System.out.println(coord);
 //		coord.goDown();
 //		System.out.println(coord);

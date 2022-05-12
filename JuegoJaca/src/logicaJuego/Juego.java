@@ -21,10 +21,29 @@ public class Juego {
 	}
 	
 
-	//NO SE QUE SE HACE
-	private void crearTablero() {
-				
+	private String barra() {
+		
 	}
+	
+	private void crearTablero() {
+		crearRocas();
+		crearGemas();
+		crearPociones();
+		crearDinero();
+	}
+	
+	
+	private boolean crearJugador(PlayerType tipo) {
+		Jugador jugador = new Jugador(tipo);
+		Coordenada c = null;
+		do {
+			c = new Coordenada();	
+		}while(coordenadaJugadores.contains(jugador)||tablero.containsKey(c));
+		coordenadaJugadores.add(c);
+		tablero.put(c, jugador); //tengo que asignar al jugador al tablero y no me deja
+		return true;
+	}
+	
 	
 	private void crearRocas() {
 		for (int i=0;i<Constantes.NUM_ROCAS;i++) {

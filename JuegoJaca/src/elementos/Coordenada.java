@@ -36,7 +36,7 @@ public class Coordenada {
 	
 
 	private void setX(int x) {
-		if(x >= 0 && x<= Constantes.TAMANNO) {
+		if(x >= 0 && x<= Constantes.TAMANNO-1) {
 			this.x = x;	
 		}else {
 			this.x = 0;
@@ -45,7 +45,7 @@ public class Coordenada {
 	}
 
 	private void setY(int y) {
-		if(y >= 0 && y<= Constantes.TAMANNO) {
+		if(y >= 0 && y<= Constantes.TAMANNO-1) {
 			this.y = y;	
 		}else {
 			this.y = 0;
@@ -118,6 +118,9 @@ public class Coordenada {
 		return "Coordenada [x=" + x + ", y=" + y + "]";
 	}
 	
-	
+	public Coordenada clone() {
+		Coordenada clone = new Coordenada(this.x, this.y);
+		return clone;
+	}
 	
 }
