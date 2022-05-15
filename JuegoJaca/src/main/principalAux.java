@@ -1,6 +1,10 @@
 package main;
 
 import elementos.Coordenada;
+import elementos.Element;
+import elementos.ElementType;
+import elementos.Jugador;
+import elementos.PlayerType;
 
 public class principalAux {
 
@@ -18,9 +22,9 @@ public class principalAux {
 //		System.out.println(coord);
 //		
 
+		Jugador j = new Jugador(ElementType.ELFO);
+		System.out.println(j.getVelocidadParaLuchar());
 		
-		Coordenada dfa = new Coordenada();
-		System.out.println(dfa.toString());
 	}
 
 }

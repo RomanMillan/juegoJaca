@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import elementos.*;
 
-public class Juego {
+public class Juego extends Object{
 
 	private HashMap<Coordenada, Element> tablero;
 	private ArrayList<Coordenada> coordenadaJugadores;
@@ -20,11 +20,6 @@ public class Juego {
 		
 	}
 	
-
-	private String barra() {
-		
-	}
-	
 	private void crearTablero() {
 		crearRocas();
 		crearGemas();
@@ -33,7 +28,7 @@ public class Juego {
 	}
 	
 	
-	private boolean crearJugador(PlayerType tipo) {
+	private boolean crearJugador(ElementType tipo) {
 		Jugador jugador = new Jugador(tipo);
 		Coordenada c = null;
 		do {

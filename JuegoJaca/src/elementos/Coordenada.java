@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import logicaJuego.Constantes;
 
-public class Coordenada {
+public class Coordenada extends Object{
 
 	private int x;
 	private int y;

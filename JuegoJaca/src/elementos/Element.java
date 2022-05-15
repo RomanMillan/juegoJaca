@@ -2,7 +2,7 @@ package elementos;
 
 import java.util.Objects;
 
-public class Element {
+public class Element extends Object{
 
 	protected ElementType type;
 

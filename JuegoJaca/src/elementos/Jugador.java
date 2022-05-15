@@ -1,10 +1,11 @@
 package elementos;
 
+
 import java.util.concurrent.ThreadLocalRandom;
 
 import logicaJuego.Constantes;
 
-public class Jugador {
+public class Jugador extends Element{
 
 	private int dinero;
 	private int gemas;
@@ -12,10 +13,13 @@ public class Jugador {
 	private int pociones;
 	
 	//constructor
-	public Jugador(PlayerType player) {
-		super();
-		this.player = player;
+
+	public Jugador(ElementType type) {
+		super(type);
+		this.player 
 	}
+
+
 
 	//getter and setter (obejtos)
 	public int getDinero() {
@@ -125,7 +129,6 @@ public class Jugador {
 	}
 	
 	public int encuentraRoca() {
-		//TODO Exception jugador?
 		int resultado;
 		if(getGemas()>0) {
 			resultado = Constantes.ROMPE_ROCA_CON_GEMA;
@@ -139,7 +142,6 @@ public class Jugador {
 		return resultado;
 		
 	}
-	
 	
 }
 
