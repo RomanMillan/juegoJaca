@@ -14,9 +14,12 @@ public class Jugador extends Element{
 	
 	//constructor
 
-	public Jugador(ElementType type) {
-		super(type);
-		this.player 
+	public Jugador(PlayerType type) {
+		super(ElementType.valueOf(type.name()));
+		this.player = type;
+		dinero = 0;
+		gemas = 0;
+		pociones = 0;
 	}
 
 

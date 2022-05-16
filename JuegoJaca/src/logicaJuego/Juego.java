@@ -17,7 +17,7 @@ public class Juego extends Object{
 	public Juego (PlayerType[]jugadores) {
 		tablero = new HashMap<>(); 
 		coordenadaJugadores = new ArrayList<>();
-		
+		dado = 0;
 	}
 	
 	private void crearTablero() {
@@ -28,14 +28,14 @@ public class Juego extends Object{
 	}
 	
 	
-	private boolean crearJugador(ElementType tipo) {
+	private boolean crearJugador(PlayerType tipo) {
 		Jugador jugador = new Jugador(tipo);
 		Coordenada c = null;
 		do {
 			c = new Coordenada();	
 		}while(coordenadaJugadores.contains(jugador)||tablero.containsKey(c));
 		coordenadaJugadores.add(c);
-		tablero.put(c, jugador); //tengo que asignar al jugador al tablero y no me deja
+		tablero.put(c, jugador);
 		return true;
 	}
 	
@@ -98,8 +98,76 @@ public class Juego extends Object{
 		}
 	}
 	
+	private void eliminarJugador(Coordenada coord) {
+		tablero.remove(coord);
+		coordenadaJugadores.remove(coord);
+	}
 	
+	public boolean isTerminado() {
+		boolean terminado = false;
+		if(coordenadaJugadores.size()==1) {
+			terminado = true;
+		}else {
+			for(int i = 0; i<coordenadaJugadores.size()&& !terminado;i++) {
+				Jugador j;
+				j = (Jugador) tablero.get(coordenadaJugadores.get(i));
+				if(j.getDinero()== Constantes.NUM_DINERO) {
+					terminado = true;
+				}
+			}
+		}
+		return terminado;
+	}
 	
+	public String getGanador() {
+		String info="";
+		Jugador j;
+		boolean terminado = false;
+		if(coordenadaJugadores.size()==1) {
+			j = (Jugador) tablero.get(coordenadaJugadores.get(0));
+			info = j.resumen();
+		}else {
+			for(int i = 0; i<coordenadaJugadores.size()&& !terminado;i++) {
+				j = (Jugador) tablero.get(coordenadaJugadores.get(i));
+				if(j.getDinero()== Constantes.NUM_DINERO) {
+					info = j.resumen();
+					terminado = true;
+				}
+			}
+		}
+		return info;
+	}
+	
+	public void decrementaDado() {
+		dado--;
+	}
+	
+	public int getValorDado() {
+		return dado;
+	}
+	
+	public void setDado() {
+		Jugador j = (Jugador) tablero.get(coordenadaJugadores.get(jugadorJuega));
+		dado = j.getVelocidadParaLuchar();
+	}
+	
+	public Element obtenerElementoTablero(Coordenada coord) {
+		return tablero.get(coord); 
+	}
+	
+	public Coordenada ObtenerCoordenadaJugadorJuega() {
+		return coordenadaJugadores.get(jugadorJuega);
+	}
+	
+	public String imprimeNombreJugadores() {
+		Jugador j;
+		StringBuilder nom = new StringBuilder();
+		for(int i = 0; i<coordenadaJugadores.size();i++) {
+			j = (Jugador) tablero.get(coordenadaJugadores.get(i));
+			nom.append("El jugador " + (i+1) + " es un " + j.getNombre() + "\n");
+		}
+		return nom.toString();
+	}
 	
 	/**
 	 * Escribe el tablero en formato no gráfico. Devuelve el string con la
