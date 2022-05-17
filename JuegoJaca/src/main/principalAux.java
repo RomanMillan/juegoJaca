@@ -46,15 +46,29 @@ public class principalAux {
 		}
 		
 		
-		StringBuilder nom = new StringBuilder();
-		for(int i = 0; i<coordenadaJugadores.size();i++) {
-			j = (Jugador) tablero.get(coordenadaJugadores.get(i));
-			nom.append("El jugador " + (i+1) + " es un " + j.getNombre() + "\n");
+//		StringBuilder nom = new StringBuilder();
+//		for(int i = 0; i<coordenadaJugadores.size();i++) {
+//			j = (Jugador) tablero.get(coordenadaJugadores.get(i));
+//			nom.append("El jugador " + (i+1) + " es un " + j.getNombre() + "\n");
+//		}
+//		System.out.println(nom);
+		
+		
+		
+//		StringBuilder v = new StringBuilder();
+//		for(int i = 0; i<coordenadaJugadores.size();i++) {
+//			j = (Jugador) tablero.get(coordenadaJugadores.get(i));
+//			v.append(j.getNombre() + " Dinero: " + j.getDinero() + " Pociones: " + j.getPociones() 
+//				+ " Gemas: " +j.getGemas()+ "\n");
+//		}
+//		System.out.println(v);
+		
+		char direction = 'N';
+		if(direction != 'N' && direction != 'S'){
+			System.out.println("Mal");
+		}else {
+			System.out.println("bien");
 		}
-		System.out.println(nom);
-		
-		
-		
 		
 		
 	}

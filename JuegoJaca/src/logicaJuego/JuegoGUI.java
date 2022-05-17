@@ -139,7 +139,7 @@ public class JuegoGUI extends Juego implements ActionListener {
 	 */
 	public void setInformacion() {
 
-		this.informacion.setText("<html>" + super.imprimeValoreJugadores().replaceAll("\n", "<br>") + "<br>"
+		this.informacion.setText("<html>" + super.imprimeValoresJugadores().replaceAll("\n", "<br>") + "<br>"
 				+ super.imprimeNombreJugadores().replaceAll("\n", "<br><br>") + "</html>");
 	}
 

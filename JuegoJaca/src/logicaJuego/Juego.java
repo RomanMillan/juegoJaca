@@ -18,6 +18,12 @@ public class Juego extends Object{
 		tablero = new HashMap<>(); 
 		coordenadaJugadores = new ArrayList<>();
 		dado = 0;
+		jugadorJuega = 0;
+		crearTablero();
+		crearJugador(jugadores[0]);
+		crearJugador(jugadores[1]);
+		crearJugador(jugadores[2]);
+		crearJugador(jugadores[3]);
 	}
 	
 	private void crearTablero() {
@@ -33,7 +39,7 @@ public class Juego extends Object{
 		Coordenada c = null;
 		do {
 			c = new Coordenada();	
-		}while(coordenadaJugadores.contains(jugador)||tablero.containsKey(c));
+		}while(coordenadaJugadores.contains(jugador)&&tablero.containsKey(c));
 		coordenadaJugadores.add(c);
 		tablero.put(c, jugador);
 		return true;
@@ -155,8 +161,13 @@ public class Juego extends Object{
 		return tablero.get(coord); 
 	}
 	
-	public Coordenada ObtenerCoordenadaJugadorJuega() {
+	public Coordenada obtenerCoordenadaJugadorJuega() {
 		return coordenadaJugadores.get(jugadorJuega);
+	}
+	
+	public String getNombreJuegadorQueJuega() {
+		Jugador j = (Jugador) tablero.get(coordenadaJugadores.get(jugadorJuega));
+		return j.getNombre();
 	}
 	
 	public String imprimeNombreJugadores() {
@@ -167,6 +178,70 @@ public class Juego extends Object{
 			nom.append("El jugador " + (i+1) + " es un " + j.getNombre() + "\n");
 		}
 		return nom.toString();
+	}
+	
+	public String imprimeValoresJugadores() {
+		Jugador j;
+		StringBuilder v = new StringBuilder();
+		for(int i = 0; i<coordenadaJugadores.size();i++) {
+			j = (Jugador) tablero.get(coordenadaJugadores.get(i));
+			v.append(j.getNombre() + " Dinero: " + j.getDinero() + " Pociones: " + j.getPociones() 
+			+ " Gemas: " +j.getGemas()+ "\n");
+		}
+		return v.toString();
+	}
+	
+	
+	public int getMovimientoJugador() {
+		Jugador j = (Jugador) tablero.get(coordenadaJugadores.get(jugadorJuega));
+		return j.getVelocidadParaLuchar();
+	}
+	
+	public void proximoJugador() {
+		if(jugadorJuega == coordenadaJugadores.size()-1) {
+			jugadorJuega = 0;
+		}else {
+			jugadorJuega++;
+		}
+	}
+	
+	private void cambiaJugadorAPosicion(Coordenada coord) {
+		Coordenada c = coordenadaJugadores.get(jugadorJuega);
+		Jugador j = (Jugador) tablero.get(coordenadaJugadores.get(jugadorJuega));
+		tablero.remove(c);
+		tablero.put(coord, j);
+		coordenadaJugadores.remove(c);
+		coordenadaJugadores.add(coord);
+	}
+	
+	private Coordenada getNextPosition(char direction) throws JuegoException {
+		if(direction != 'N' || direction != 'S'|| direction != 'E'|| direction != 'O') {
+			throw new JuegoException("Direccion incorrecta");
+		}
+		Coordenada c = coordenadaJugadores.get(jugadorJuega);
+		Coordenada ac = c.clone();
+		
+		switch (direction) {
+		case 'N': {
+			ac.goUp();
+			break;
+		}
+		case 'S': {
+			ac.goDown();
+			break;
+		}
+		case 'E': {
+			ac.goRight();
+			break;
+		}
+		case 'O': {
+			ac.goLeft();
+			break;
+		}
+		default:
+			System.out.println("Fuera de rango");
+		}
+		return ac;
 	}
 	
 	/**
