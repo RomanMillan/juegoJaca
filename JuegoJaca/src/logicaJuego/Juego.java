@@ -215,7 +215,7 @@ public class Juego extends Object{
 	}
 	
 	private Coordenada getNextPosition(char direction) throws JuegoException {
-		if(direction != 'N' || direction != 'S'|| direction != 'E'|| direction != 'O') {
+		if(direction != 'N' && direction != 'S'&& direction != 'E'&& direction != 'O') {
 			throw new JuegoException("Direccion incorrecta");
 		}
 		Coordenada c = coordenadaJugadores.get(jugadorJuega);

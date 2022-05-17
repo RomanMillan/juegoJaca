@@ -107,6 +107,7 @@ public class Jugador extends Element{
 				resultado = Constantes.PIERDE_USA_POCIMA;
 			}else if(this.getDinero()>0) {
 				resultado = Constantes.PIERDE_DINERO;
+				setDinero(getDinero()-1);
 			}else {
 				resultado = Constantes.PIERDE_MUERE;
 			}
@@ -116,7 +117,7 @@ public class Jugador extends Element{
 	
 	public int getVelocidadParaLuchar() {
 		ThreadLocalRandom velocidad = ThreadLocalRandom.current();
-        return velocidad.nextInt(0, getVelocidad());
+        return velocidad.nextInt(1, getVelocidad());
 	}
 	
 	public void encuentraDinero() {
