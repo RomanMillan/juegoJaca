@@ -84,7 +84,7 @@ public class Jugador extends Element{
 	//toString
 	
 	public String resumen() {
-		return "Jugador [dinero=" + dinero + ", gemas=" + gemas + ", player=" + player + ", pociones=" + pociones + "]";
+		return player + ": dinero: " + dinero + ", gemas: " + gemas +  "pociones: " + pociones;
 	}
 	
 	public int lucha(Jugador enemigo) {
@@ -96,7 +96,8 @@ public class Jugador extends Element{
 			resultado = Constantes.EMPATE;
 		}else if(fuerzaJugador>fuerzaEnemigo) {
 			if(enemigo.getPociones()>0) {
-				resultado = Constantes.GANA_USA_POCIMA;	
+				resultado = Constantes.GANA_USA_POCIMA;
+				setPociones(getPociones()+1);
 			}else if(enemigo.getDinero()>0) {
 				resultado = Constantes.GANA_DINERO;
 			}else {
@@ -105,6 +106,7 @@ public class Jugador extends Element{
 		}else {
 			if(this.getPociones()>0) {
 				resultado = Constantes.PIERDE_USA_POCIMA;
+				setPociones(getPociones()-1);
 			}else if(this.getDinero()>0) {
 				resultado = Constantes.PIERDE_DINERO;
 				setDinero(getDinero()-1);
