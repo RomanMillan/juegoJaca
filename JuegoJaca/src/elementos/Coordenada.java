@@ -118,6 +118,7 @@ public class Coordenada extends Object{
 		return "Coordenada [x=" + x + ", y=" + y + "]";
 	}
 	
+
 	public Coordenada clone() {
 		Coordenada clone = new Coordenada(this.x, this.y);
 		return clone;

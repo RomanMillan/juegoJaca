@@ -157,6 +157,7 @@ public class Juego extends Object{
 		dado = j.getVelocidadParaLuchar();
 	}
 	
+	//para obtener el elemento del tablero osea si hay una piedra o algo.
 	public Element obtenerElementoTablero(Coordenada coord) {
 		return tablero.get(coord); 
 	}
