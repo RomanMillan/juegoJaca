@@ -9,13 +9,15 @@ import elementos.ElementType;
 import elementos.Jugador;
 import elementos.PlayerType;
 import logicaJuego.Constantes;
+import logicaJuego.Juego;
+import logicaJuego.JuegoGUI;
 
 public class principalAux {
 
 	public static void main(String[] args) {
 
 		
-
+		/*
 		HashMap<Coordenada, Element> tablero = new HashMap<>();
 		 ArrayList<Coordenada> coordenadaJugadores = new ArrayList<>();
 		
@@ -44,7 +46,7 @@ public class principalAux {
 				System.out.println(info);
 			}
 		}
-		
+		*/
 		
 //		StringBuilder nom = new StringBuilder();
 //		for(int i = 0; i<coordenadaJugadores.size();i++) {
@@ -62,14 +64,30 @@ public class principalAux {
 //				+ " Gemas: " +j.getGemas()+ "\n");
 //		}
 //		System.out.println(v);
-		
+		/*
 		char direction = 'N';
 		if(direction != 'N' && direction != 'S'){
 			System.out.println("Mal");
 		}else {
 			System.out.println("bien");
 		}
+		*/
 		
+		ArrayList<PlayerType> jugadores = new ArrayList<>();
+		jugadores.add(PlayerType.ELFO);
+		jugadores.add(PlayerType.GUERRERO);
+		jugadores.add(PlayerType.MAGO);
+		jugadores.add(PlayerType.OGRO);
+		
+		PlayerType[] ordenJugadores = new PlayerType[4];
+		
+		ordenJugadores[0]= jugadores.get(0);
+		ordenJugadores[1]= jugadores.get(1);
+		ordenJugadores[2]= jugadores.get(2);
+		ordenJugadores[3]= jugadores.get(3);
+
+		Juego juego = new Juego(ordenJugadores);
+		System.out.println(juego.isTerminado());
 		
 	}
 

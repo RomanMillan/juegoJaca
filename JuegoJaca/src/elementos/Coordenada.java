@@ -120,8 +120,7 @@ public class Coordenada extends Object{
 	
 
 	public Coordenada clone() {
-		Coordenada clone = new Coordenada(this.x, this.y);
-		return clone;
+		return new Coordenada(this.x, this.y);
 	}
 	
 }

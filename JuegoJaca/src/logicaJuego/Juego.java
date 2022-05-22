@@ -210,9 +210,9 @@ public class Juego extends Object{
 		Coordenada c = coordenadaJugadores.get(jugadorJuega);
 		Jugador j = (Jugador) tablero.get(coordenadaJugadores.get(jugadorJuega));
 		tablero.remove(c);
-		tablero.put(coord, j);
 		coordenadaJugadores.remove(c);
-		coordenadaJugadores.add(coord);
+		tablero.put(coord, j);
+		coordenadaJugadores.add(jugadorJuega,coord);
 	}
 	
 	private Coordenada getNextPosition(char direction) throws JuegoException {

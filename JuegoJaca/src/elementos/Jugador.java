@@ -84,7 +84,7 @@ public class Jugador extends Element{
 	//toString
 	
 	public String resumen() {
-		return player + ": dinero: " + dinero + ", gemas: " + gemas +  "pociones: " + pociones;
+		return player + ": dinero: " + dinero + ", gemas: " + gemas +  " pociones: " + pociones;
 	}
 	
 	public int lucha(Jugador enemigo) {
@@ -139,7 +139,7 @@ public class Jugador extends Element{
 		if(getGemas()>0) {
 			resultado = Constantes.ROMPE_ROCA_CON_GEMA;
 			setGemas(getGemas()-1);
-		}else if(getMagia()>4) {
+		}else if(getMagiaParaLuchar()>4) {
 			resultado = Constantes.GANA_A_LA_ROCA;
 		}else {
 			resultado = Constantes.PIERDE_A_LA_ROCA;

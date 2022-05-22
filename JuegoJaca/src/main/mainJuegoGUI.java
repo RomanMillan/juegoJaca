@@ -15,10 +15,8 @@ public class mainJuegoGUI {
 	public static Scanner teclado = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		try {
 			
-				
 			ArrayList<PlayerType> jugadores = new ArrayList<>();
 			jugadores.add(PlayerType.ELFO);
 			jugadores.add(PlayerType.GUERRERO);
