@@ -39,7 +39,7 @@ public class Juego extends Object{
 		Coordenada c = null;
 		do {
 			c = new Coordenada();	
-		}while(coordenadaJugadores.contains(jugador)&&tablero.containsKey(c));
+		}while(tablero.containsKey(c));
 		coordenadaJugadores.add(c);
 		tablero.put(c, jugador);
 		return true;
