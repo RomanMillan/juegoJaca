@@ -20,10 +20,10 @@ public class Juego extends Object{
 		dado = 0;
 		jugadorJuega = 0;
 		crearTablero();
-		crearJugador(jugadores[0]);
-		crearJugador(jugadores[1]);
-		crearJugador(jugadores[2]);
-		crearJugador(jugadores[3]);
+		
+		for(int i = 0;i<jugadores.length;i++) {
+			crearJugador(jugadores[i]);
+		}
 	}
 	
 	private void crearTablero() {
@@ -310,7 +310,7 @@ public class Juego extends Object{
 		// Tengo que ver que hay en la nueva casilla
 		Element elemento = this.tablero.get(coordDestino);
 
-		if (elemento != null) { // Hay algo en la casilla
+		if (elemento != null && !coordDestino.equals(coordenadaJugadores.get(jugadorJuega))) { // Hay algo en la casilla
 			if (elemento instanceof Jugador) {
 
 				Jugador enemigo = (Jugador) elemento;

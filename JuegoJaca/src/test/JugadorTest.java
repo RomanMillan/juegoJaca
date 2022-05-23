@@ -59,44 +59,14 @@ class JugadorTest {
 	void getFuerzaParaLucharTest() {
 		Jugador j = new Jugador(PlayerType.ELFO);
 		int r = j.getFuerzaParaLuchar();
-		if(r==0) {
-			assertEquals(0,r);
-		}else if(r==1) {
-			assertEquals(1,r);
-		}else if(r==2) {
-			assertEquals(2,r);
-		}else if(r==3) {
-			assertEquals(3,r);
-		}else if(r==4) {
-			assertEquals(4,r);
-		}else if(r==5) {
-			assertEquals(5,r);
-		}else {
-			fail("Fuera de rango");
-		}
+		assertTrue(r>=0&&r<=5);
 	}
 	
 	@Test
 	void getMagiaParaLucharTest() {
 		Jugador j = new Jugador(PlayerType.ELFO);
 		int r = j.getMagiaParaLuchar();
-		if(r==0) {
-			assertEquals(0,r);
-		}else if(r==1) {
-			assertEquals(1,r);
-		}else if(r==2) {
-			assertEquals(2,r);
-		}else if(r==3) {
-			assertEquals(3,r);
-		}else if(r==4) {
-			assertEquals(4,r);
-		}else if(r==5) {
-			assertEquals(5,r);
-		}else if(r==6) {
-			assertEquals(6,r);
-		}else {
-			fail("Fuera de rango");
-		}
+		assertTrue(r>=0&&r<=6);
 	}
 	
 	@Test
@@ -143,25 +113,7 @@ class JugadorTest {
 	void getVelocidadParaLucharTest() {
 		Jugador j = new Jugador(PlayerType.ELFO);
 		int r = j.getVelocidadParaLuchar();
-		if(r==0) {
-			assertEquals(0,r);
-		}else if(r==1) {
-			assertEquals(1,r);
-		}else if(r==2) {
-			assertEquals(2,r);
-		}else if(r==3) {
-			assertEquals(3,r);
-		}else if(r==4) {
-			assertEquals(4,r);
-		}else if(r==5) {
-			assertEquals(5,r);
-		}else if(r==6) {
-			assertEquals(6,r);
-		}else if(r==7) {
-			assertEquals(7,r);
-		}else {
-			fail("Fuera de rango");
-		}
+		assertTrue(r>=0&&r<=7);
 	}
 	
 	@Test
