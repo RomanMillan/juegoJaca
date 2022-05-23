@@ -6,8 +6,19 @@ import org.junit.jupiter.api.Test;
 
 import elementos.Jugador;
 import elementos.PlayerType;
+import logicaJuego.Constantes;
 
 class JugadorTest {
+	
+	
+	@Test
+	void constructorJugadorTest() {
+		Jugador j = new Jugador(PlayerType.ELFO);
+		assertEquals(0, j.getPociones());
+		assertEquals(0, j.getDinero());
+		assertEquals(0, j.getGemas());
+		assertEquals(PlayerType.ELFO, j.getPlayer());
+	}
 	
 	@Test
 	void getDineroTest() {
@@ -78,35 +89,46 @@ class JugadorTest {
 	}
 	
 	
-	//REVISAR
-//	@Test
-//	void luchaTest() {
-//		Jugador j = new Jugador(PlayerType.ELFO);
-//		Jugador jE = new Jugador(PlayerType.GUERRERO);
-//		int fuerzaJ = j.getFuerzaParaLuchar();
-//		int fuerzaJE = jE.getFuerzaParaLuchar();
-//		int r = j.lucha(jE);
-//		
-//		if(fuerzaJ == fuerzaJE) {
-//			assertEquals(0, r);
-//		}else if(fuerzaJ>fuerzaJE) {
-//			if(jE.getPociones()>0) {
-//				assertEquals(1, r);	
-//			}else if(jE.getDinero()>0) {
-//				assertEquals(2, r);	
-//			}else {
-//				assertEquals(3, r);	
-//			}
-//		}else {
-//			if(j.getPociones()>0) {
-//				assertEquals(4, r);	
-//			}else if(j.getDinero()>0) {
-//				assertEquals(5, r);	
-//			}else {
-//				assertEquals(6, r);
-//			}
-//		}
-//	}
+	@Test
+	void luchaTest() {
+		Jugador j = new Jugador(PlayerType.ELFO);
+		Jugador jE = new Jugador(PlayerType.GUERRERO);
+		
+		int r = j.lucha(jE);
+		assertTrue((r==Constantes.EMPATE)
+					||(r==Constantes.GANA_MUERE)
+					||(r==Constantes.PIERDE_MUERE));
+		
+	}
+	
+	@Test
+	void luchaDineroTest() {
+		Jugador j = new Jugador(PlayerType.ELFO);
+		Jugador jE = new Jugador(PlayerType.MAGO);
+		
+		j.setDinero(1);
+		jE.setDinero(1);
+		
+		j.lucha(jE);
+		int d = j.getDinero();
+		
+		assertTrue((d==0)||(d==1)||(d==2));
+	}
+	
+	@Test
+	void luchaPocionesTest() {
+		Jugador j = new Jugador(PlayerType.ELFO);
+		Jugador jE = new Jugador(PlayerType.MAGO);
+		
+		j.setPociones(1);
+		jE.setPociones(1);
+		
+		j.lucha(jE);
+		int d = j.getPociones();
+		
+		assertTrue((d==0)||(d==1)||(d==2));
+	}
+	
 	
 	
 	@Test
@@ -152,12 +174,7 @@ class JugadorTest {
 	void encuentraRocaMagiaTest() {
 		Jugador j = new Jugador(PlayerType.ELFO);
 		int r = j.encuentraRoca();
-		int magia = j.getFuerzaParaLuchar();
-		if(magia>4) {
-			assertEquals(1,r);
-		}else {
-			assertEquals(2,r);	
-		}
+		assertTrue((r==1)||(r==2));
 		
 	}
 

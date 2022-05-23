@@ -1,10 +1,11 @@
 package test;
 
-import static org.junit.Assert.assertArrayEquals;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+
 
 import java.util.ArrayList;
 
@@ -26,10 +27,26 @@ class JuegoTest {
 
 	
 
+	@Test
+	void constructorJuegoTest() {
+		PlayerType[] jugadores = new PlayerType[4];
+		
+		jugadores[0] = PlayerType.ELFO;
+		jugadores[1] = PlayerType.GUERRERO;
+		jugadores[2] = PlayerType.MAGO;
+		jugadores[3] = PlayerType.MAGO;
+		
+		Juego juego = new Juego(jugadores);
+		String r = juego.toString();
+
+		assertTrue(r.length() > 0);
+		assertEquals(PlayerType.ELFO.name(), juego.getNombreJuegadorQueJuega());
+		assertEquals(0, juego.getValorDado());
+	}
 
 	
 	@Test
-	void isTerminadoTest() {
+	void isTerminadoNoTest() {
 		ArrayList<PlayerType> jugadores = new ArrayList<>();
 		jugadores.add(PlayerType.ELFO);
 		jugadores.add(PlayerType.GUERRERO);
@@ -47,20 +64,16 @@ class JuegoTest {
 		assertFalse(juego.isTerminado());
 	}
 	
-	//implementar
+
 	@Test
-	void isTerminado1JugadorTest() {
+	void isTerminadoUnJugadorTest() {
 		ArrayList<PlayerType> jugadores = new ArrayList<>();
 		jugadores.add(PlayerType.ELFO);
-		jugadores.add(PlayerType.GUERRERO);
-		jugadores.add(PlayerType.MAGO);
-		jugadores.add(PlayerType.OGRO);
-		
-		PlayerType[] ordenJugadores = new PlayerType[1];
-		
-		ordenJugadores[0]= jugadores.get(0);
 
+		PlayerType[] ordenJugadores = new PlayerType[1];
+		ordenJugadores[0]= jugadores.get(0);
 		Juego juego = new Juego(ordenJugadores);
+		
 		assertTrue(juego.isTerminado());
 	}
 
@@ -72,11 +85,20 @@ class JuegoTest {
 		jugadores.add(PlayerType.MAGO);
 		jugadores.add(PlayerType.OGRO);
 		
-		PlayerType[] ordenJugadores = new PlayerType[1];
+		PlayerType[] ordenJugadores = new PlayerType[4];
 		
 		ordenJugadores[0]= jugadores.get(0);
-
+		ordenJugadores[1]= jugadores.get(1);
+		ordenJugadores[2]= jugadores.get(2);
+		ordenJugadores[3]= jugadores.get(3);
+		
 		Juego juego = new Juego(ordenJugadores);
+		
+		juego.proximoJugador();
+		Coordenada c = juego.obtenerCoordenadaJugadorJuega();
+		Jugador j = (Jugador) juego.obtenerElementoTablero(c);
+		j.setDinero(Constantes.NUM_DINERO);
+		
 		assertTrue(juego.isTerminado());
 	}
 	
@@ -99,7 +121,21 @@ class JuegoTest {
 		Juego juego = new Juego(ordenJugadores);
 		assertEquals("",juego.getGanador());
 	}
-	/*
+	
+	@Test
+	void getGanadorTest() {
+		ArrayList<PlayerType> jugadores = new ArrayList<>();
+		jugadores.add(PlayerType.ELFO);
+		
+		PlayerType[] ordenJugadores = new PlayerType[1];
+		ordenJugadores[0]= jugadores.get(0);
+		Juego juego = new Juego(ordenJugadores);
+		
+		assertEquals("ELFO: dinero: 0, gemas: 0 pociones: 0",juego.getGanador());
+	}
+	
+	
+	
 	@Test
 	void getGanadorDineroTest() {
 		ArrayList<PlayerType> jugadores = new ArrayList<>();
@@ -116,13 +152,13 @@ class JuegoTest {
 		ordenJugadores[3]= jugadores.get(3);
 		
 		Juego juego = new Juego(ordenJugadores);
-		PlayerType auxJ = jugadores.get(0);
-		Jugador j = new Jugador(auxJ);
-		j.encuentraDinero();
-		j.encuentraDinero();
-		assertEquals(auxJ,juego.getGanador());
+		Coordenada c = juego.obtenerCoordenadaJugadorJuega();
+		Jugador j = (Jugador) juego.obtenerElementoTablero(c);
+		j.setDinero(Constantes.NUM_DINERO);
+		String ganador = juego.getGanador();
+		assertEquals("ELFO: dinero: 2, gemas: 0 pociones: 0",ganador);
 	}
-	*/
+	
 	
 	
 	@Test
@@ -296,9 +332,7 @@ class JuegoTest {
 	}
 
 
-	
-	
-	/*
+	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	void obtenerElementoTableroTest() {
 		ArrayList<PlayerType> jugadores = new ArrayList<>();
@@ -316,14 +350,110 @@ class JuegoTest {
 
 		Juego juego = new Juego(ordenJugadores);
 		Coordenada c = new Coordenada();
-		Element r = (Element) juego.obtenerElementoTablero(c);
-		if(r == ) {
-			assertEquals("", juego.toString());	
+		Element e = (Element) juego.obtenerElementoTablero(c);
+		
+		assertTrue((e == null)
+				|| (e.asType().equals(ElementType.ELFO))
+				|| (e.asType().equals(ElementType.GUERRERO)) 
+				|| (e.asType().equals(ElementType.MAGO)) 
+				|| (e.asType().equals(ElementType.OGRO)) 
+				|| (e.asType().equals(ElementType.GEMA))
+				|| (e.asType().equals(ElementType.POCION))
+				|| (e.asType().equals(ElementType.DINERO)) 
+				|| (e.asType().equals(ElementType.ROCA)));
 		}
 		
-	}
-	*/
 	
-	
-	
+		@Test
+		void movePlayerNoTest() {	
+			ArrayList<PlayerType> jugadores = new ArrayList<>();
+			jugadores.add(PlayerType.ELFO);
+			PlayerType[] ordenJugadores = new PlayerType[1];
+			
+			ordenJugadores[0]= jugadores.get(0);
+			Juego juego = new Juego(ordenJugadores);
+
+			try {
+				juego.movePlayer('-');
+				fail("Error. Exception no ejecutada");
+			} catch (Exception e) {
+				
+			}
+		}
+		
+		@Test
+		void movePlayerArribaTest() throws JuegoException, JugadorException {	
+			ArrayList<PlayerType> jugadores = new ArrayList<>();
+			jugadores.add(PlayerType.ELFO);
+			PlayerType[] ordenJugadores = new PlayerType[1];
+			
+			ordenJugadores[0]= jugadores.get(0);
+			Juego juego = new Juego(ordenJugadores);
+
+			Coordenada a = juego.obtenerCoordenadaJugadorJuega();
+			Coordenada f = new Coordenada(a.getX(), a.getY() - 1);
+
+			juego.movePlayer('N');
+
+			assertTrue(juego.isTerminado() 
+						|| juego.obtenerCoordenadaJugadorJuega().equals(a)
+						|| juego.obtenerCoordenadaJugadorJuega().equals(f));
+			}
+		
+		@Test
+		void movePlayerAbajoTest() throws JuegoException, JugadorException {	
+			ArrayList<PlayerType> jugadores = new ArrayList<>();
+			jugadores.add(PlayerType.ELFO);
+			PlayerType[] ordenJugadores = new PlayerType[1];
+			
+			ordenJugadores[0]= jugadores.get(0);
+			Juego juego = new Juego(ordenJugadores);
+
+			Coordenada a = juego.obtenerCoordenadaJugadorJuega();
+			Coordenada f = new Coordenada(a.getX(), a.getY() + 1);
+
+			juego.movePlayer('S');
+
+			assertTrue(juego.isTerminado() 
+						|| juego.obtenerCoordenadaJugadorJuega().equals(a)
+						|| juego.obtenerCoordenadaJugadorJuega().equals(f));
+			}
+		
+		@Test
+		void movePlayerIzquierdaTest() throws JuegoException, JugadorException {	
+			ArrayList<PlayerType> jugadores = new ArrayList<>();
+			jugadores.add(PlayerType.ELFO);
+			PlayerType[] ordenJugadores = new PlayerType[1];
+			
+			ordenJugadores[0]= jugadores.get(0);
+			Juego juego = new Juego(ordenJugadores);
+
+			Coordenada a = juego.obtenerCoordenadaJugadorJuega();
+			Coordenada f = new Coordenada(a.getX()-1, a.getY());
+
+			juego.movePlayer('E');
+
+			assertTrue(juego.isTerminado() 
+						|| juego.obtenerCoordenadaJugadorJuega().equals(a)
+						|| juego.obtenerCoordenadaJugadorJuega().equals(f));
+			}
+		
+		@Test
+		void movePlayerDerechaTest() throws JuegoException, JugadorException {	
+			ArrayList<PlayerType> jugadores = new ArrayList<>();
+			jugadores.add(PlayerType.ELFO);
+			PlayerType[] ordenJugadores = new PlayerType[1];
+			
+			ordenJugadores[0]= jugadores.get(0);
+			Juego juego = new Juego(ordenJugadores);
+
+			Coordenada a = juego.obtenerCoordenadaJugadorJuega();
+			Coordenada f = new Coordenada(a.getX()+1, a.getY());
+
+			juego.movePlayer('O');
+
+			assertTrue(juego.isTerminado() 
+						|| juego.obtenerCoordenadaJugadorJuega().equals(a)
+						|| juego.obtenerCoordenadaJugadorJuega().equals(f));
+			}
 }
